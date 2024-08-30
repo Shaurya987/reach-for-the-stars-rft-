@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .next-button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .next-button:hover {
+            background-color: #218838;
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            background-color: #d4edda;
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid #c3e6cb;
+        }
+
+        .popup-message {
+            display: none;
+            background-color: #d4edda;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #c3e6cb;
+        }
+
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <form id="registrationForm">
+            <!-- Step 1: Basic Details -->
+            <div class="step step-1 active">
+                <h2>Step 1: Basic Details</h2>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="mobile">Mobile Number:</label>
+                <input type="text" id="mobile" name="mobile" required>
+
+                <label for="email">Email-ID:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+
+                <button type="button" class="next-button" onclick="nextStep()">Next</button>
+            </div>
+
+           <!-- Step 2: Preferences -->
+<!-- Step 2: Preferences -->
+<div class="step step-2">
+    <h2>Step 2: Preferences</h2>
+
+    <!-- Courses Dropdown -->
+    <label for="courses">Courses:</label>
+    <select id="courses" name="courses" required onchange="updateYearOptions()">
+        <option value="">Select...</option>
+        <option value="medical">Medical</option>
+        <option value="engineering">Engineering</option>
+    </select>
+
+    <!-- Region Dropdown -->
+    <label for="region">Region:</label>
+    <select id="region" name="region" required>
+        <option value="">Select...</option>
+        <option value="anywhere">Anywhere from India</option>
+        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+        <option value="Andhra Pradesh">Andhra Pradesh</option>
+        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+        <option value="Assam">Assam</option>
+        <option value="Bihar">Bihar</option>
+        <option value="Chandigarh">Chandigarh</option>
+        <option value="Chhattisgarh">Chhattisgarh</option>
+        <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+        <option value="Delhi">Delhi</option>
+        <option value="Goa">Goa</option>
+        <option value="Gujarat">Gujarat</option>
+        <option value="Haryana">Haryana</option>
+        <option value="Himachal Pradesh">Himachal Pradesh</option>
+        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+        <option value="Jharkhand">Jharkhand</option>
+        <option value="Karnataka">Karnataka</option>
+        <option value="Kerala">Kerala</option>
+        <option value="Ladakh">Ladakh</option>
+        <option value="Lakshadweep">Lakshadweep</option>
+        <option value="Madhya Pradesh">Madhya Pradesh</option>
+        <option value="Maharashtra">Maharashtra</option>
+        <option value="Manipur">Manipur</option>
+        <option value="Meghalaya">Meghalaya</option>
+        <option value="Mizoram">Mizoram</option>
+        <option value="Nagaland">Nagaland</option>
+        <option value="Odisha">Odisha</option>
+        <option value="Puducherry">Puducherry</option>
+        <option value="Punjab">Punjab</option>
+        <option value="Rajasthan">Rajasthan</option>
+        <option value="Sikkim">Sikkim</option>
+        <option value="Tamil Nadu">Tamil Nadu</option>
+        <option value="Telangana">Telangana</option>
+        <option value="Tripura">Tripura</option>
+        <option value="Uttar Pradesh">Uttar Pradesh</option>
+        <option value="Uttarakhand">Uttarakhand</option>
+        <option value="West Bengal">West Bengal</option>
+    </select>
+
+    <!-- Year Dropdown -->
+    <label for="year">Year:</label>
+    <select id="year" name="year" required>
+        <option value="">Select...</option>
+        <!-- Year options will be dynamically populated based on the course -->
+    </select>
+
+    <!-- Next Button -->
+    <button type="button" class="next-button" onclick="nextStep()">Next</button>
+            </div>
+
+<!-- JavaScript to handle dynamic year options -->
+<script>
+function updateYearOptions() {
+    var course = document.getElementById("courses").value;
+    var yearSelect = document.getElementById("year");
+    yearSelect.innerHTML = ""; // Clear existing options
+
+    var years = [];
+
+    if (course === "medical") {
+        years = [1, 2, 3, 4, 5];
+    } else if (course === "engineering") {
+        years = [1, 2, 3, 4];
+    }
+
+    // Add the default option
+    var defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.text = "Select...";
+    yearSelect.appendChild(defaultOption);
+
+    // Populate the year options based on the selected course
+    years.forEach(function(year) {
+        var option = document.createElement("option");
+        option.value = year;
+        option.text = year;
+        yearSelect.appendChild(option);
+    });
+}
+
+function goToNextStep() {
+    // Add your logic here to proceed to the next step in your form or process
+    alert("Proceeding to the next step!");
+}
+</script>
+
+
+            <!-- Step 3: PAN Card Details -->
+            <div class="step step-3">
+                <h2>Step 3: PAN Card Details</h2>
+                <label for="panCard">PAN Card:</label>
+                <input type="text" id="panCard" name="panCard" required>
+
+                <button type="button" class="next-button" onclick="submitForm()">Submit</button>
+            </div>
+        </form>
+        
+        <div class="success-message" id="successMessage">
+            You have been successfully registered as a donor!
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 0;
+        const steps = document.querySelectorAll('.step');
+        const successMessage = document.getElementById('successMessage');
+        const popupMessage = document.getElementById('popupMessage');
+
+        function nextStep() {
+            if (currentStep < steps.length - 1) {
+                steps[currentStep].classList.remove('active');
+                currentStep++;
+                steps[currentStep].classList.add('active');
+                if (currentStep === 1) {
+                    popupMessage.style.display = 'block';
+                }
+            } else {
+                // On final step (submit), show success message and reset form
+                document.getElementById('registrationForm').reset();
+                steps[currentStep].classList.remove('active');
+                successMessage.style.display = 'block';
+            }
+        }
+
+        function submitForm() {
+            // Here, you could add form validation if needed
+            // Redirect to success.html
+            window.location.href = 'success.html';
+        }
+
+        function toggleCourseType() {
+            const preference = document.getElementById('preference').value;
+            const courseTypeSelection = document.getElementById('courseTypeSelection');
+            if (preference === 'courses') {
+                courseTypeSelection.style.display = 'block';
+            } else {
+                courseTypeSelection.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
