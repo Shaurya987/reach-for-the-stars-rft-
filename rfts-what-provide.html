@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Do We Provide in Reach for the Stars?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap; /* Ensures responsiveness */
+            min-height: 100vh; /* Full height of viewport */
+        }
+        .left-section {
+            background-color: #3367d6; /* Classy blue */
+            color: white;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            min-width: 300px;
+            text-align: center;
+        }
+        .left-section h1 {
+            font-size: 4rem; /* Smaller font size */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Added text shadow */
+        }
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            flex: 1;
+            padding: 40px;
+            min-width: 300px;
+        }
+        .boxes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 20px;
+            position: relative;
+        }
+        .box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+            font-size: 1rem;
+            border-radius: 10px;
+            color: black;
+        }
+        .gray-box {
+            background-color: #b5b5b5;
+        }
+        .yellow-box {
+            background-color: #f4da6b;
+        }
+        .blue-box {
+            background-color: #7bb8e6;
+        }
+        .orange-box {
+            background-color: #e6a77b;
+        }
+        /* Star background behind boxes */
+        .star-background {
+            content: "";
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background-color: rgba(255, 182, 115, 0.3); /* Light orange */
+            top: -50px;
+            left: -50px;
+            z-index: -1;
+            transform: rotate(45deg); /* Tilt to create a star-like shape */
+        }
+        .logo {
+            position: absolute;
+            top: 10px;
+            right: 50px;
+            width: 300px; /* Logo is now 2x the size */
+        }
+        a {
+            color: black;
+            text-decoration: underline;
+        }
+
+        /* Back to Home Button */
+        .back-home-button {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            color: white;
+            background-color: #ff5722; /* Vibrant orange */
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .back-home-button:hover {
+            background-color: #e64a19; /* Darker orange on hover */
+        }
+
+        /* Responsive design for smaller screens */
+        @media screen and (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .boxes {
+                grid-template-columns: 1fr; /* Stack boxes vertically on smaller screens */
+                width: 100%;
+            }
+            .logo {
+                top: 20px;
+                right: 20px;
+            }
+            .left-section h1 {
+                font-size: 2rem; /* Adjust heading size for smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Section -->
+        <div class="left-section">
+            <h1>What Do We Provide in Reach for the Stars to the Students?</h1>
+        </div>
+
+        <!-- Right Section -->
+        <div class="right-section">
+            <!-- Logo on top right -->
+            <img class="logo" src="praytna_edugirls.jpg" alt="Prayatna Logo">
+            
+            <!-- Star background -->
+            <div class="star-background"></div>
+            
+            <!-- Content Boxes -->
+            <div class="boxes">
+                <div class="box gray-box">We support 100 girls with scholarships for professional courses such as Engineering, Medical, and Law, covering tuition fees and related expenses.</div>
+                <div class="box orange-box">Our program includes financial assistance for college fees, hostel enrolment, and necessary receipts to ease the burden on students.</div>
+                <div class="box yellow-box">We provide mentorship support to address emotional needs and prepare students for the workforce, ensuring they are equipped for success.</div>
+                <div class="box blue-box">Students benefit from a comprehensive support system designed to help them thrive academically and personally throughout their course.</div>
+            </div>
+
+            <!-- Back to Home Button -->
+            <a href="index.html">
+                <button class="back-home-button">Back to Home</button>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
