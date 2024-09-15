@@ -1,341 +1,578 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Registration</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            padding: 20px;
-        }
 
-        .form-container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 900px;
-            margin: 0 auto;
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        h2 {
-            color: #333;
-            border-bottom: 2px solid #28a745;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-
-        input[type="file"] {
-            border: none;
-            background: #f4f4f4;
-            padding: 10px;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-
-        .submit-button, .next-button, .prev-button {
-            background-color: #28a745;
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .submit-button:hover, .next-button:hover, .prev-button:hover {
-            background-color: #218838;
-        }
-
-        .toggle-password {
-            position: absolute;
-            right: 10px;
-            top: 35px;
-            cursor: pointer;
-        }
-
-        .step {
-            display: none;
-        }
-
-        .step.active {
-            display: block;
-        }
-
-        .error {
-            border-color: red;
-        }
-
-        #passwordError {
-            color: red;
-            display: none;
-            margin-top: -10px;
-            margin-bottom: 15px;
-        }
-
-        #emailError {
-            color: red;
-            display: none;
-        }
-
-        #casteCertificateContainer {
-            display: block;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="form-container">
-        <form method="POST" action="scholar.php" enctype="multipart/form-data">
-
-            <!-- Step 1: Basic Details -->
-            <div class="step step-1 active">
-                <h2>Step 1: Basic Details</h2>
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-
-                <label for="mobile">Mobile Number:</label>
-                <input type="number" id="mobile" name="mobile" required>
-
-                <label for="email">E-mail Address:</label>
-                <input type="email" id="email" name="email" required>
-                <span id="emailError" class="error" style="display:none;">Invalid email format</span>
-
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-                <i class="fa fa-eye toggle-password" onclick="togglePassword('password')"></i>
-
-                <label for="confirmPassword">Confirm Password:</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" required>
-                <i class="fa fa-eye toggle-password" onclick="togglePassword('confirmPassword')"></i>
-                <span id="passwordError">Passwords do not match</span>
-
-                <button type="button" class="next-button" onclick="nextStep()">Next</button>
-            </div>
-
-            <!-- Step 2: Personal Details -->
-            <div class="step step-2">
-                <h2>Step 2: Personal Details</h2>
-                <label for="aadhar">Aadhaar Number:</label>
-                <input type="number" id="aadhar" name="aadhar" required>
-
-                <label for="fathersName">Father’s Name:</label>
-                <input type="text" id="fathersName" name="fathersName" required>
-
-                <label for="mothersName">Mother’s Name:</label>
-                <input type="text" id="mothersName" name="mothersName" required>
-
-                <label for="address">Permanent Address:</label>
-                <textarea id="address" name="address" rows="4" required></textarea>
-
-                <label for="caste">Caste Category:</label>
-                <select id="caste" name="caste" required onchange="toggleCasteCertificate(this.value)">
-                    <option value="">Select Caste</option>
-                    <option value="General">General</option>
-                    <option value="OBC">OBC</option>
-                    <option value="SC">SC</option>
-                    <option value="ST">ST</option>
-                </select>
-
-              
-                <label for="highestQualification">Highest Qualification:</label>
-                <select id="highestQualification" name="highestQualification" required>
-                    <option value="">Select Qualification</option>
-                    <option value="10th">10th</option>
-                    <option value="12th">12th</option>
-                    <option value="Undergraduate">Undergraduate</option>
-                    <option value="Postgraduate">Postgraduate</option>
-                </select>
-
-                <label for="latestDegree">Latest Degree Obtained:</label>
-                <input type="text" id="latestDegree" name="latestDegree" required>
-
-                <label for="latestInstitution">Latest Institution Attended:</label>
-                <input type="text" id="latestInstitution" name="latestInstitution" required>
-
-                <label for="percentage10">Percentage in 10th Grade:</label>
-                <input type="number" id="percentage10" name="percentage10" required>
-
-                <label for="percentage12">Percentage in 12th Grade:</label>
-                <input type="number" id="percentage12" name="percentage12" required>
-
-                <label for="percentageCollege">Percentage in Latest Degree:</label>
-                <input type="number" id="percentageCollege" name="percentageCollege" required>
-
-                <label for="courses">Courses Interested In:</label>
-                <select id="courses" name="courses" required>
-                    <option value="">Select Course</option>
-                    <option value="Medical">Medical</option>
-                    <option value="Engineering">Engineering</option>
-                </select>
-
-                <label for="collegesApplied">Colleges Applied To:</label>
-                <input type="text" id="collegesApplied" name="collegesApplied" required>
-
-                <label for="admissionStatus">Admission Status:</label>
-                <select id="admissionStatus" name="admissionStatus" required>
-                    <option value="">Select Status</option>
-                    <option value="Admitted">Admitted</option>
-                    <option value="Not Admitted">Not Admitted</option>
-                </select>
-
-                <label for="allIndiaExam">All India Entrance Exam:</label>
-                <select id="allIndiaExam" name="allIndiaExam" required>
-                    <option value="">Select Exam</option>
-                    <option value="JEE">JEE</option>
-                    <option value="NEET">NEET</option>
-                    <option value="CAT">CAT</option>
-                    <option value="MAT">MAT</option>
-                </select>
-
-                <label for="examName">Name of the Exam:</label>
-                <input type="text" id="examName" name="examName" required>
-
-                <label for="rankPercentile">Rank/Percentile:</label>
-                <input type="text" id="rankPercentile" name="rankPercentile" required>
-
-                
-                <label for="aadharCard">Aadhaar Card:</label>
-                <input type="file" id="aadharCard" name="aadharCard" accept="application/pdf,image/*" required>
-
-                <label for="marksheet10">10th Marksheets:</label>
-                <input type="file" id="marksheet10" name="marksheet10" accept="application/pdf,image/*" required>
-                
-                <label for="marksheet12">12th Marksheets:</label>
-                <input type="file" id="marksheet12" name="marksheet12" accept="application/pdf,image/*" required>
-                
-
-                <button type="button" class="prev-button" onclick="prevStep()">Previous</button>
-                <button type="button" class="next-button" onclick="nextStep()">Next</button>
-            </div>
-
-            <!-- Step 3: Family and Income Details -->
-            <div class="step step-3">
-                <h2>Step 3: Family and Income Details</h2>
-                <label for="fathersOccupation">Father’s Occupation:</label>
-                <input type="text" id="fathersOccupation" name="fathersOccupation" required>
-
-                <label for="mothersOccupation">Mother’s Occupation:</label>
-                <input type="text" id="mothersOccupation" name="mothersOccupation" required>
-
-                <label for="fathersIncome">Father’s Annual Income:</label>
-                <input type="number" id="fathersIncome" name="fathersIncome" required>
-
-                <label for="incomeCertificate">Father’s Income Certificate:</label>
-                <input type="file" id="incomeCertificate" name="incomeCertificate" accept="application/pdf,image/*" required>
-
-                <label for="guardianName">Guardian's Name (if any):</label>
-                <input type="text" id="guardianName" name="guardianName">
-
-                <label for="guardianOccupation">Guardian's Occupation (if any):</label>
-                <input type="text" id="guardianOccupation" name="guardianOccupation">
-
-                <label for="guardianIncome">Guardian's Annual Income (if any):</label>
-                <input type="number" id="guardianIncome" name="guardianIncome">
-
-                <button type="button" class="prev-button" onclick="prevStep()">Previous</button>
-                <button type="submit" class="submit-button">Submit</button>
-            </div>
-        </form>
-    </div>
-
-    <script>
-        let currentStep = 1;
-
-        function showStep(step) {
-            document.querySelectorAll('.step').forEach(function (element) {
-                element.classList.remove('active');
-            });
-            document.querySelector('.step-' + step).classList.add('active');
-        }
-
-        function nextStep() {
-    const currentForm = document.querySelector(`.step.step-${currentStep}`);
-    const inputs = currentForm.querySelectorAll('input[required], select[required], textarea[required]');
-    let valid = true;
-
-    inputs.forEach(input => {
-        if (!input.value && !(input.type === 'file' && input.files.length > 0)) {
-            input.classList.add('error');
-            valid = false;
-        } else {
-            input.classList.remove('error');
-        }
-    });
-
-    const email = document.getElementById('email').value;
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!emailPattern.test(email)) {
-        document.getElementById('email').classList.add('error');
-        document.getElementById('emailError').style.display = 'block';
-        valid = false;
-    } else {
-        document.getElementById('email').classList.remove('error');
-        document.getElementById('emailError').style.display = 'none';
-    }
-
-    if (currentStep === 1) {
-        const password = document.getElementById('password').value;
-        const confirmPassword = document.getElementById('confirmPassword').value;
-
-        if (password !== confirmPassword) {
-            document.getElementById('passwordError').style.display = 'block';
-            valid = false;
-        } else {
-            document.getElementById('passwordError').style.display = 'none';
-        }
-    }
-
-    if (valid) {
-        currentStep++;
-        showStep(currentStep);
-    }
-}
-
-
-        function prevStep() {
-            currentStep--;
-            showStep(currentStep);
-        }
-
-        function togglePassword(id) {
-            const passwordInput = document.getElementById(id);
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-            } else {
-                passwordInput.type = 'password';
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Student Registration</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                padding: 20px;
             }
-        }
 
-        function toggleCasteCertificate(caste) {
-            const casteCertificateContainer = document.getElementById('casteCertificateContainer');
-            if (caste === 'General') {
-                casteCertificateContainer.style.display = 'none';
-                document.getElementById('casteCertificate').required = false;
-            } else {
-                casteCertificateContainer.style.display = 'block';
-                document.getElementById('casteCertificate').required = true;
+            .form-container {
+                background-color: #fff;
+                padding: 30px;
+                border-radius: 10px;
+                max-width: 900px;
+                margin: 0 auto;
+                box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
             }
-        }
-    </script>
-</body>
+
+            h2 {
+                color: #333;
+                border-bottom: 2px solid #28a745;
+                padding-bottom: 10px;
+                margin-bottom: 20px;
+            }
+
+            label {
+                display: block;
+                margin-top: 10px;
+                font-weight: bold;
+            }
+
+            input,
+            select,
+            textarea {
+                width: 100%;
+                padding: 10px;
+                margin-top: 5px;
+                margin-bottom: 15px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-sizing: border-box;
+            }
+
+            input[type="file"] {
+                border: none;
+                background: #f4f4f4;
+                padding: 10px;
+                border-radius: 5px;
+                box-sizing: border-box;
+            }
+
+            .submit-button,
+            .next-button,
+            .prev-button {
+                background-color: #28a745;
+                color: white;
+                padding: 12px 25px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+
+            .submit-button:hover,
+            .next-button:hover,
+            .prev-button:hover {
+                background-color: #218838;
+            }
+
+            .toggle-password {
+                position: absolute;
+                right: 10px;
+                top: 35px;
+                cursor: pointer;
+            }
+
+            .step {
+                display: none;
+            }
+
+            .step.active {
+                display: block;
+            }
+
+            .error {
+                border-color: red;
+            }
+
+            #passwordError {
+                color: red;
+                display: none;
+                margin-top: -10px;
+                margin-bottom: 15px;
+            }
+
+            #emailError {
+                color: red;
+                display: none;
+            }
+
+            #casteCertificateContainer {
+                display: block;
+            }
+
+            /* Default label style */
+            label {
+                color: black;
+                /* Normal label color */
+            }
+
+            /* Highlight label when its associated input is invalid */
+            label.invalid {
+                color: red;
+                /* Color when the field is not filled */
+            }
+
+            input[type="number"]::-webkit-outer-spin-button,
+            input[type="number"]::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="form-container">
+            <form method="POST" action="scholar.php" enctype="multipart/form-data">
+
+                <!-- Step 1: Basic Details -->
+                <div class="step step-1 active">
+                    <h2>Step 1: Basic Details</h2>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="mobile">Mobile Number:</label>
+                    <input type="number" id="mobile" name="mobile" required>
+
+                    <label for="email">E-mail Address:</label>
+                    <input type="email" id="email" name="email" required>
+                    <span id="emailError" class="error" style="display:none;">Invalid email format</span>
+
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" minlength="8" maxlength="10" required>
+                    <i class="fa fa-eye toggle-password" onclick="togglePassword('password')"></i>
+                    <span id="password-error" style="color: red; display: none;">Password must be between 8 and 10
+                        characters.</span>
+
+
+                    <label for="confirmPassword">Confirm Password:</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" minlength="8" maxlength="10"
+                        required>
+                    <i class="fa fa-eye toggle-password" onclick="togglePassword('confirmPassword')"></i>
+                    <span id="passwordError">Passwords do not match</span>
+
+                    <button type="button" class="next-button" onclick="nextStep()">Next</button>
+                </div>
+
+                <div class="step step-2">
+                    <h2>Step 2: Personal Details</h2>
+                    <label for="aadhar">Aadhaar Number:</label>
+                    <input type="number" id="aadhar" name="aadhar" required maxlength="12"
+                        oninput="if(this.value.length > 12) this.value = this.value.slice(0, 12);">
+                    <span class="error" id="aadharError"></span>
+
+                    <label for="fathersName">Father’s Name:</label>
+                    <input type="text" id="fathersName" name="fathersName" required>
+                    <span class="error" id="fathersNameError"></span>
+
+                    <label for="mothersName">Mother’s Name:</label>
+                    <input type="text" id="mothersName" name="mothersName" required>
+                    <span class="error" id="mothersNameError"></span>
+
+                    <label for="address">Permanent Address:</label>
+                    <textarea id="address" name="address" rows="4" required></textarea>
+                    <span class="error" id="addressError"></span>
+
+                    <label for="caste">Caste Category:</label>
+                    <select id="caste" name="caste" required onchange="toggleCasteCertificate(this.value)">
+                        <option value="">Select Caste</option>
+                        <option value="General">General</option>
+                        <option value="OBC">OBC</option>
+                        <option value="SC">SC</option>
+                        <option value="ST">ST</option>
+                    </select>
+                    <span class="error" id="casteError"></span>
+
+                    <label for="highestQualification">Highest Qualification:</label>
+                    <select id="highestQualification" name="highestQualification" required>
+                        <option value="">Select Qualification</option>
+                        <option value="10th">10th</option>
+                        <option value="12th">12th</option>
+                        <option value="Undergraduate">Undergraduate</option>
+                        <option value="Postgraduate">Postgraduate</option>
+                    </select>
+                    <span class="error" id="highestQualificationError"></span>
+
+                    <label for="latestDegree">Latest Degree Obtained:</label>
+                    <input type="text" id="latestDegree" name="latestDegree" required>
+                    <span class="error" id="latestDegreeError"></span>
+
+                    <label for="latestInstitution">Latest Institution Attended:</label>
+                    <input type="text" id="latestInstitution" name="latestInstitution" required>
+                    <span class="error" id="latestInstitutionError"></span>
+
+                    <label for="percentageCollege">Percentage in Latest Degree:</label>
+                    <input type="number" id="percentageCollege" name="percentageCollege" required min="0" max="99"
+                        maxlength="2" oninput="this.value = this.value.slice(0, 2)">
+                    <span class="error" id="percentageCollegeError"></span>
+
+                    <label for="percentage10">Percentage in 10th Grade:</label>
+                    <input type="number" id="percentage10" name="percentage10" required min="0" max="99" maxlength="2"
+                        oninput="this.value = this.value.slice(0, 2)">
+                    <span class="error" id="percentage10Error"></span>
+
+                    <label for="percentage12">Percentage in 12th Grade:</label>
+                    <input type="number" id="percentage12" name="percentage12" required min="0" max="99" maxlength="2"
+                        oninput="this.value = this.value.slice(0, 2)">
+                    <span class="error" id="percentage12Error"></span>
+
+                    <label for="courses">Courses Interested In:</label>
+                    <select id="courses" name="courses" required>
+                        <option value="">Select Course</option>
+                        <option value="Medical">Medical</option>
+                        <option value="Engineering">Engineering</option>
+                    </select>
+                    <span class="error" id="coursesError"></span>
+
+                    <label for="collegesApplied">Colleges Applied To:</label>
+                    <input type="text" id="collegesApplied" name="collegesApplied" required>
+                    <span class="error" id="collegesAppliedError"></span>
+
+                    <label for="admissionStatus">Admission Status:</label>
+                    <select id="admissionStatus" name="admissionStatus" required onchange="toggleDocuments(this.value)">
+                        <option value="">Select Status</option>
+                        <option value="Admitted">Admitted</option>
+                        <option value="Not Admitted">Not Admitted</option>
+                    </select>
+                    <span class="error" id="admissionStatusError"></span>
+
+                    <div id="feeStructureContainer" style="display: none;">
+                        <label for="feeStructure">Course fee  (5 MB MAX):</label>
+                        <input type="file" id="feeStructure" name="feeStructure" accept="application/pdf,image/*">
+                        <span class="error" id="feeStructureError"></span>
+                    </div>
+
+                    <div id="admissionSlipContainer" style="display: none;">
+                        <label for="admissionSlip">Admission Slip  (5 MB MAX):</label>
+                        <input type="file" id="admissionSlip" name="admissionSlip" accept="application/pdf,image/*">
+                        <span class="error" id="admissionSlipError"></span>
+                    </div>
+
+                    <label for="allIndiaExam">All India Entrance Exam:</label>
+                    <select id="allIndiaExam" name="allIndiaExam" required>
+                        <option value="">Select Exam</option>
+                        <option value="JEE">JEE</option>
+                        <option value="NEET">NEET</option>
+                        <option value="OTHERS">OTHERS</option>
+                    </select>
+                    <span class="error" id="allIndiaExamError"></span>
+
+                    <label for="examName" id="examNameLabel" class="hidden">Name of the Exam:</label>
+                    <input type="text" id="examName" name="examName" class="hidden" disabled>
+                    <span class="error" id="examNameError"></span>
+
+                    <label for="rankPercentile" id="rankPercentileLabel">Rank/Percentile:</label>
+                    <input type="text" id="rankPercentile" name="rankPercentile" required>
+                    <span class="error" id="rankPercentileError"></span>
+
+                    <label for="aadharCard" id="aadharCardLabel">Aadhaar Card  (5 MB MAX):</label>
+                    <input type="file" id="aadharCard" name="aadharCard" accept="application/pdf,image/*" required>
+                    <span class="error" id="aadharCardError"></span>
+
+                    <label for="marksheet10" id="marksheet10Label">10th Marksheets  (5 MB MAX):</label>
+                    <input type="file" id="marksheet10" name="marksheet10" accept="application/pdf,image/*" required>
+                    <span class="error" id="marksheet10Error"></span>
+
+                    <label for="marksheet12" id="marksheet12Label">12th Marksheets  (5 MB MAX):</label>
+                    <input type="file" id="marksheet12" name="marksheet12" accept="application/pdf,image/*" required>
+                    <span class="error" id="marksheet12Error"></span>
+
+                    <label for="latestDegreeDoc" id="latestDegreeDocLabel">Latest Degree Document (5 MB MAX):</label>
+                    <input type="file" id="latestDegreeDoc" name="latestDegreeDoc">
+                    <span class="error" id="latestDegreeDocError"></span>
+
+                    <button type="button" class="prev-button" onclick="prevStep()">Previous</button>
+                    <button type="button" class="next-button" onclick="validateStep2()">Next</button>
+                </div>
+
+                <style>
+                    .error-border {
+                        border: 2px solid red;
+                    }
+
+                    .error {
+                        color: red;
+                        font-size: 12px;
+                    }
+
+                    .hidden {
+                        display: none;
+                    }
+                </style>
+
+                <script>
+                    function validateStep2() {
+                        const requiredFields = [
+                            'aadhar', 'fathersName', 'mothersName', 'address', 'caste', 'highestQualification',
+                            'latestDegree', 'latestInstitution', 'percentageCollege', 'percentage10', 'percentage12',
+                            'courses', 'collegesApplied', 'admissionStatus', 'allIndiaExam', 'rankPercentile',
+                            'aadharCard', 'marksheet10', 'marksheet12'
+                        ];
+
+                        let allValid = true;
+
+                        requiredFields.forEach(fieldId => {
+                            const fieldElement = document.getElementById(fieldId);
+                            const errorElement = document.getElementById(`${fieldId}Error`);
+
+                            if (fieldElement.type === 'file') {
+                                if (fieldElement.files.length === 0) {
+                                    errorElement.textContent = 'This document is required';
+                                    fieldElement.classList.add('error-border');
+                                    allValid = false;
+                                } else {
+                                    errorElement.textContent = '';
+                                    fieldElement.classList.remove('error-border');
+                                }
+                            } else {
+                                if (!fieldElement.checkValidity()) {
+                                    errorElement.textContent = fieldElement.validationMessage;
+                                    fieldElement.classList.add('error-border');
+                                    allValid = false;
+                                } else {
+                                    errorElement.textContent = '';
+                                    fieldElement.classList.remove('error-border');
+                                }
+                            }
+                        });
+
+                        if (allValid) {
+                            alert('All required fields are valid. Proceeding to the next step.');
+                            nextStep();
+                        } else {
+                            alert('Please fill all required fields correctly before proceeding.');
+                        }
+                    }
+
+                    // Get elements
+                    const allIndiaExam = document.getElementById('allIndiaExam');
+                    const examName = document.getElementById('examName');
+                    const examNameLabel = document.getElementById('examNameLabel');
+
+                    // Add event listener for when the selection changes
+                    allIndiaExam.addEventListener('change', function () {
+                        if (this.value === 'OTHERS') {
+                            // If 'OTHERS' is selected, make the exam name field visible and required
+                            examName.classList.remove('hidden');
+                            examName.disabled = false;
+                            examName.required = true;
+                            examNameLabel.classList.remove('hidden');
+                        } else {
+                            // Otherwise, hide the exam name field and remove the required attribute
+                            examName.classList.add('hidden');
+                            examName.disabled = true;
+                            examName.required = false;
+                            examNameLabel.classList.add('hidden');
+                        }
+                    });
+                </script>
+
+
+
+                <!-- Step 3: Family and Income Details -->
+                <div class="step step-3">
+                    <h2>Step 3: Family and Income Details</h2>
+                    <label for="fathersOccupation">Father’s Occupation:</label>
+                    <input type="text" id="fathersOccupation" name="fathersOccupation" required>
+
+                    <label for="mothersOccupation">Mother’s Occupation:</label>
+                    <input type="text" id="mothersOccupation" name="mothersOccupation" required>
+
+                    <label for="fathersIncome">Father’s Annual Income:</label>
+                    <input type="number" id="fathersIncome" name="fathersIncome" required>
+
+                    <label for="incomeCertificate">Father’s Income Certificate (5 MB MAX):</label>
+                    <input type="file" id="incomeCertificate" name="incomeCertificate" accept="application/pdf,image/*"
+                        required>
+
+                    <label for="guardianName">Guardian's Name (if any):</label>
+                    <input type="text" id="guardianName" name="guardianName">
+
+                    <label for="guardianOccupation">Guardian's Occupation (if any):</label>
+                    <input type="text" id="guardianOccupation" name="guardianOccupation">
+
+                    <label for="guardianIncome">Guardian's Annual Income (if any):</label>
+                    <input type="number" id="guardianIncome" name="guardianIncome">
+
+                    <!-- Mentorship Need -->
+                    <label for="mentorshipNeed">Do you need mentorship?</label>
+                    <select id="mentorshipNeed" name="mentorshipNeed"  required>
+                        onchange="toggleMentorshipDescription(this.value)">
+                        <option value="">Select Option</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+
+                    <!-- Mentorship Description -->
+                    <div id="mentorshipDescriptionContainer" style="display: none;">
+                        <label for="mentorshipDescription">Describe your mentorship needs:</label>
+                        <textarea id="mentorshipDescription" name="mentorship_Description" rows="4"></textarea>
+                    </div>
+
+                    <button type="button" class="prev-button" onclick="prevStep()">Previous</button>
+                    <button type="submit" class="submit-button">Submit</button>
+                </div>
+
+                <script>
+                    let currentStep = 1;
+
+                    function showStep(step) {
+                        document.querySelectorAll('.step').forEach(function (element) {
+                            element.classList.remove('active');
+                        });
+                        document.querySelector('.step-' + step).classList.add('active');
+                    }
+
+                    function nextStep() {
+                        const currentForm = document.querySelector(`.step.step-${currentStep}`);
+                        const inputs = currentForm.querySelectorAll('input[required], select[required], textarea[required]');
+                        let valid = true;
+
+                        // Validate required fields (excluding file inputs)
+                        inputs.forEach(input => {
+                            if (input.type !== 'file') {  // Exclude file inputs
+                                if (!input.value) {
+                                    input.classList.add('error');
+                                    valid = false;
+                                } else {
+                                    input.classList.remove('error');
+                                }
+                            }
+                        });
+
+
+                        // Validate email format
+                        const email = document.getElementById('email').value;
+                        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                        if (!emailPattern.test(email)) {
+                            document.getElementById('email').classList.add('error');
+                            document.getElementById('emailError').style.display = 'block';
+                            valid = false;
+                        } else {
+                            document.getElementById('email').classList.remove('error');
+                            document.getElementById('emailError').style.display = 'none';
+                        }
+
+                        // Validate password on step 1
+                        if (currentStep === 1) {
+                            const password = document.getElementById('password').value;
+                            const confirmPassword = document.getElementById('confirmPassword').value;
+
+                            if (password !== confirmPassword) {
+                                document.getElementById('passwordError').style.display = 'block';
+                                valid = false;
+                            } else {
+                                document.getElementById('passwordError').style.display = 'none';
+                            }
+                        }
+
+                        console.log('Form Valid:', valid);
+
+                        if (valid) {
+                            currentStep++;
+                            showStep(currentStep);
+                        }
+                    }
+
+                    function prevStep() {
+                        currentStep--;
+                        showStep(currentStep);
+                    }
+
+                    function togglePassword(id) {
+                        const passwordInput = document.getElementById(id);
+                        if (passwordInput.type === 'password') {
+                            passwordInput.type = 'text';
+                        } else {
+                            passwordInput.type = 'password';
+                        }
+                    }
+
+                    function toggleCasteCertificate(caste) {
+                        const casteCertificateContainer = document.getElementById('casteCertificateContainer');
+                        if (caste === 'General') {
+                            casteCertificateContainer.style.display = 'none';
+                            document.getElementById('casteCertificate').required = false;
+                        } else {
+                            casteCertificateContainer.style.display = 'block';
+                            document.getElementById('casteCertificate').required = true;
+                        }
+                    }
+
+                    function toggleDocuments(status) {
+                        const feeStructureContainer = document.getElementById('feeStructureContainer');
+                        const admissionSlipContainer = document.getElementById('admissionSlipContainer');
+
+                        if (status === 'Admitted') {
+                            feeStructureContainer.style.display = 'block';
+                            admissionSlipContainer.style.display = 'block';
+                        } else {
+                            feeStructureContainer.style.display = 'none';
+                            admissionSlipContainer.style.display = 'none';
+                        }
+                    }
+
+                    function toggleMentorshipDescription(value) {
+                        const mentorshipDescriptionContainer = document.getElementById('mentorshipDescriptionContainer');
+                        if (value === 'Yes') {
+                            mentorshipDescriptionContainer.style.display = 'block';
+                        } else {
+                            mentorshipDescriptionContainer.style.display = 'none';
+                        }
+                    }
+
+                    // Function to handle form validation on the Next button click
+                    function validateForm() {
+                        let inputs = document.querySelectorAll('#documentForm input[required]');
+                        let isValid = true;
+
+                        inputs.forEach(input => {
+                            const label = document.getElementById(`${input.id}Label`);
+                            if (!input.value) {
+                                label.classList.add('invalid');
+                                isValid = false;
+                            } else {
+                                label.classList.remove('invalid');
+                            }
+                        });
+
+                        if (!isValid) {
+                            alert("Please fill in all required fields before proceeding.");
+                        } else {
+                            nextStep();
+                        }
+                    }
+
+                    // Password validation function
+                    document.getElementById('password').addEventListener('input', function () {
+                        const password = this.value;
+                        const errorMessage = document.getElementById('password-error');
+                        if (password.length < 8 || password.length > 10) {
+                            errorMessage.style.display = 'block';
+                        } else {
+                            errorMessage.style.display = 'none';
+                        }
+                    });
+
+                    // Prevent form submission if password length is invalid
+                    document.querySelector('form').addEventListener('submit', function (e) {
+                        const password = document.getElementById('password').value;
+                        const errorMessage = document.getElementById('password-error');
+
+                        if (password.length < 8 || password.length > 10) {
+                            errorMessage.style.display = 'block';
+                            e.preventDefault();
+                        }
+                    });
+                </script>
+    </body>
+
 </html>

@@ -6,7 +6,135 @@
     <title>Prayatna Blog - Empowering Through Education</title>
     <link rel="stylesheet" href="blog.css">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            margin-right: 20px;
+            height: 60px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-actions a {
+            text-decoration: none;
+            padding: 8px 15px;
+            margin-left: 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .signup,
+        .login {
+            background-color: #FF865D;
+            color: white;
+        }
+
+        .signup:hover,
+        .login:hover {
+            background-color: #FF9A6B;
+        }
+
+        nav {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            background-color: #FFB23A;
+            padding: 10px;
+            border-radius: 10px;
+            width: 100%;
+            margin: 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: black;
+            padding: 10px 15px;
+            font-weight: bold;
+            font-size: 16px;
+            display: inline-block;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #FFD54F;
+            color: black;
+        }
+
+        .donate-now {
+            display: inline-block;
+            background-color: white;
+            color: red;
+            border: 2px solid red;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 20px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            text-align: center;
+        }
+
+        .donate-now:hover {
+            background-color: red;
+            color: white;
+        }
+    </style>
 </head>
+<body>
+    <header>
+        <div class="top-header">
+            <div class="logo">
+                <img src="edu-girls-logo.png" alt="Edu-Girls Logo">
+            </div>
+            <div class="header-actions">
+                <a href="registration.html" class="signup">Sign Up</a>
+                <a href="login_scholar.html" class="login">Login</a>
+            </div>
+        </div>
+        <nav>
+            <a href="maintainence.html">About Us</a>
+            <a href="faqs.html">FAQs</a>
+            <a href="#footer" class="contact-us-button">Contact Us</a>
+            <a href="maintainence.html">Meet Our Scholars</a>
+            <a href="blog.html">Blog</a>
+            <a href="maintainence.html" class="donate-now">DONATE NOW</a>
+        </nav>
+    </header>
+</body>
+</html>
 <body>
     <!-- First Blog Section -->
     <div class="container">

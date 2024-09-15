@@ -6,7 +6,130 @@
     <title>FAQs - Donors & Scholars</title>
     <link rel="stylesheet" href="faqs.css">
 </head>
-<body>
+<style>
+ body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            margin-right: 20px;
+            height: 60px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-actions a {
+            text-decoration: none;
+            padding: 8px 15px;
+            margin-left: 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .signup,
+        .login {
+            background-color: #FF865D;
+            color: white;
+        }
+
+        .signup:hover,
+        .login:hover {
+            background-color: #FF9A6B;
+        }
+
+        nav {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            background-color: #FFB23A;
+            padding: 10px;
+            border-radius: 10px;
+            width: 100%;
+            margin: 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: black;
+            padding: 10px 15px;
+            font-weight: bold;
+            font-size: 16px;
+            display: inline-block;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #FFD54F;
+            color: black;
+        }
+
+        .donate-now {
+            display: inline-block;
+            background-color: white;
+            color: red;
+            border: 2px solid red;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 20px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            text-align: center;
+        }
+
+        .donate-now:hover {
+            background-color: red;
+            color: white;
+        }
+    </style>
+    <header>
+        <div class="top-header">
+            <div class="logo">
+                <img src="edu-girls-logo.png" alt="Edu-Girls Logo">
+            </div>
+            <div class="header-actions">
+                <a href="registration.html" class="signup">Sign Up</a>
+                <a href="login_scholar.html" class="login">Login</a>
+            </div>
+        </div>
+        <nav>
+            <a href="maintainence.html">About Us</a>
+            <a href="faqs.html">FAQs</a>
+            <a href="#footer" class="contact-us-button">Contact Us</a>
+            <a href="maintainence.html">Meet Our Scholars</a>
+            <a href="blog.html">Blog</a>
+            <a href="maintainence.html" class="donate-now">DONATE NOW</a>
+        </nav>
+    </header>
     <div class="faq-header">
         <h1>Frequently Asked Questions</h1>
     </div>
@@ -46,7 +169,7 @@
         <div class="faq-section">
             <h2>FAQs FOR SCHOLARS</h2>
             <div class="faq-item">
-                <label class="question">Eligibility for the scholarship:</label>
+                <label class="question">Eligibility for the scholarship ?</label>
                 <p class="answer">Students must have been admitted to a professional course, hold a rank in national exams (if applicable), and provide an income certificate to be eligible for the scholarship.</p>
             </div>
             <div class="faq-item">
@@ -84,4 +207,183 @@
         </div>
     </div>
 </body>
+ <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Reach for the Stars Footer</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <style>
+            /* Footer Styles */
+            footer {
+                background-color: white;
+                color: grey;
+                padding: 20px 10px;
+                font-family: Arial, sans-serif;
+            }
+    
+            .footer-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+    
+            .footer-left, .footer-middle, .footer-right {
+                flex: 1 1 100%;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+    
+            .footer-left {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+    
+            .footer-logo {
+                height: 50px;
+                margin: 10px;
+            }
+    
+            .footer-middle {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+    
+            .footer-links {
+                list-style: none;
+                padding: 0;
+                margin: 0 20px;
+            }
+    
+            .footer-links li {
+                margin-bottom: 10px;
+            }
+    
+            .footer-links a {
+                color: grey;
+                text-decoration: none;
+                font-weight: bold;
+            }
+    
+            .footer-links a:hover {
+                text-decoration: underline;
+            }
+    
+            .footer-right {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+    
+            .contact-info {
+                margin-bottom: 10px;
+            }
+    
+            .contact-info li {
+                list-style: none;
+                margin-bottom: 5px;
+            }
+    
+            .contact-info a {
+                color: grey;
+                text-decoration: none;
+            }
+    
+            .contact-info a:hover {
+                text-decoration: underline;
+            }
+    
+            .social-icons {
+                display: flex;
+                gap: 15px;
+            }
+    
+            .social-icons a {
+                color: grey;
+                font-size: 20px;
+                text-decoration: none;
+            }
+    
+            .social-icons a:hover {
+                color: black;
+            }
+    
+            .footer-bottom {
+                text-align: center;
+                padding-top: 10px;
+                border-top: 1px solid #e0e0e0;
+            }
+    
+            .footer-bottom p {
+                margin: 0;
+                font-size: 14px;
+            }
+    
+            /* Responsive Design */
+            @media (min-width: 768px) {
+                .footer-container {
+                    flex-wrap: nowrap;
+                }
+    
+                .footer-left, .footer-middle, .footer-right {
+                    flex: 1;
+                    text-align: left;
+                }
+    
+                .footer-middle {
+                    justify-content: flex-start;
+                }
+    
+                .footer-right {
+                    align-items: flex-end;
+                }
+            }
+        </style>
+   
+        <footer>
+            <div class="footer-container">
+                <footer id="footer"></footer>
+                <div class="footer-left">
+                    <img src="praytna_edugirls.jpg" alt="Prayatna Logo" class="footer-logo">
+                   
+                    <p>&copy; 2024 Reach for the Stars. All rights reserved.</p>
+                </div>
+                <div class="footer-middle">
+                    <ul class="footer-links">
+                        <li><a href="registation .html">Sign up</a></li>
+                        <li><a href="maintainence.html">About Us</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                       <li><a href="faqs.html">FAQs</a></li> 
+                        <li><a href="maintainence.html">Meet Our Scholars</a></li>
+                    </ul>
+                </div>
+                <div class="footer-right">
+                    <div class="contact-info">
+                        <a href="#footer" class="contact-us-button">Contact Us</a>
+                        <p>Email: <a href="mailto:info@reachforthestars.co.in">info@reachforthestar.org</a></p>
+                        <p>Phone: <a href="tel:+1234567890">+91-120 4975 339</a></p>
+                    </div>
+                    <div class="social-icons">
+                        <a href="https://x.com/prayatna_india" target="_blank">
+  <!-- Replace the SVG code below with the actual "X" logo SVG -->
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 0L12 8L6 0H0L9 12L0 24H6L12 16L18 24H24L15 12L24 0H18Z"/>
+  </svg>
+</a>
+<a href="https://in.linkedin.com/company/prayatna" target="_blank">
+  <i class="fab fa-linkedin" style="font-size: 20px;"></i>
+</a>
+                        <a href="https://www.instagram.com/prayatna_india/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/prayatnaindia/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Reach for the Stars is a registered NGO committed to supporting education and personal development.</p>
+            </div>
+        </footer>
 </html>

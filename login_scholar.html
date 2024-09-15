@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | User Dashboard</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #4CAF50, #81C784);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+
+        .login-container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .login-container form {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center the form elements */
+        }
+
+        .login-container .input-group {
+            position: relative;
+            margin-bottom: 20px;
+            width: 100%; /* Make the input-group fit within the container */
+        }
+
+        .login-container input {
+            width: calc(100% - 40px); /* Adjust width to ensure it stays within the input-group */
+            padding: 14px;
+            padding-left: 40px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s;
+            box-sizing: border-box; /* Ensures padding does not affect the total width */
+        }
+
+        .login-container input:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        .login-container input::placeholder {
+            color: #aaa;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 10px;
+            top: 12px;
+            font-size: 18px;
+            color: #4CAF50;
+        }
+
+        .login-btn {
+            background: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+            font-weight: bold;
+            width: 100%; /* Make button match input widths */
+            box-sizing: border-box;
+        }
+
+        .login-btn:hover {
+            background: #388E3C;
+        }
+
+        .forgot-password {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .forgot-password a {
+            color: #4CAF50;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .forgot-password a:hover {
+            color: #388E3C;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 13px;
+            color: #777;
+        }
+
+        .footer a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Welcome Back!</h2>
+        <form action="login.php" method="POST">
+            <div class="input-group">
+                <span class="input-icon">&#9993;</span>
+                <input type="email" name="email" placeholder="Email Address" required>
+            </div>
+            <div class="input-group">
+                <span class="input-icon">&#128274;</span>
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+        <div class="forgot-password">
+            <a href="#">Forgot your password?</a>
+        </div>
+        <div class="footer">
+            <p>Not registered? <a href="#">Create an account</a></p>
+        </div>
+    </div>
+</body>
+</html>

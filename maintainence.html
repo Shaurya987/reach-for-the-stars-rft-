@@ -1,63 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<!doctype html>
+<html>
+  <head>
+    <title>Site Maintenance</title>
+    <meta charset="utf-8"/>
+    <meta name="robots" content="noindex"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site Under Maintenance</title>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
-        }
-
-        .container {
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 3rem;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .button {
-            display: inline-block;
-            padding: 15px 30px;
-            font-size: 1.5rem;
-            color: #fff;
-            background-color: #e74c3c; /* Red color */
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-
-        .button:hover {
-            background-color: #c0392b; /* Darker red on hover */
-            transform: scale(1.05);
-        }
-
-        .footer {
-            margin-top: 30px;
-            font-size: 1rem;
-            color: #777;
-        }
+      body { text-align: center; padding: 20px; font: 20px Helvetica, sans-serif; color: #efe8e8; }
+      @media (min-width: 768px){
+        body{ padding-top: 150px; }
+      }
+      h1 { font-size: 50px; }
+      article { display: block; text-align: left; max-width: 650px; margin: 0 auto; }
+      a { color: #dc8100; text-decoration: none; }
+      a:hover { color: #efe8e8; text-decoration: none; }
     </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Site Under Maintenance</h1>
-        <a href="index.html" class="button">We'll Be Back Soon</a>
-        <div class="footer">
-            &copy; Reach for the Stars. All rights reserved.
+  </head>
+  <body bgcolor="2e2929">
+    <article>
+        <h1>We&rsquo;ll be back soon!</h1>
+        <div>
+            <p>Sorry for the inconvenience but we&rsquo;re performing some maintenance at the moment. If you need to you can always <a href="mailto:#">contact us</a>, otherwise we&rsquo;ll be back online shortly!</p>
+            <p>&mdash; The Team</p>
+            
         </div>
-    </div>
-</body>
+        <div style="display: flex; flex-direction: row; justify-content: space-between;">
+            <p class="day"></p>
+            <p class="hour"></p>
+            <p class="minute"></p>
+            <p class="second"></p>
+        </div>
+    </article>
+    <script>
+        const countDown = () => {
+            const countDay = new Date('16 sept 2024 12:00:00');
+            const now = new Date();
+            const counter = countDay - now;
+            const second = 1000;
+            const minute = second * 60;
+            const hour = minute * 60;
+            const day = hour * 24;
+            const textDay = Math.floor(counter / day);
+            const textHour = Math.floor((counter % day) / hour);
+            const textMinute = Math.floor((counter % hour) / minute);
+            const textSecond = Math.floor((counter % minute) / second)
+            document.querySelector(".day").innerText = textDay + ' Days';
+            document.querySelector(".hour").innerText = textHour + ' Hours';
+            document.querySelector(".minute").innerText = textMinute + ' Minutes';
+            document.querySelector(".second").innerText = textSecond + ' Seconds';
+        }
+        setInterval(countDown, 1000);
+    </script>
+  </body>
 </html>
