@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Buttons</title>
+    <style>
+        /* Body and Background */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #FF9933, #008000);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Donation Section Styling */
+        .donation-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            padding: 20px;
+        }
+
+        /* Donation Card Styling */
+        .donation-card {
+            background-color: white;
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+            width: 280px;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Icon Styling */
+        .donation-card i {
+            font-size: 60px;
+            transition: transform 0.5s ease;
+        }
+
+        .donation-card h2 {
+            margin: 20px 0;
+            color: #333;
+            font-size: 28px;
+            transition: color 0.3s ease;
+        }
+
+        /* Animated Button Styling */
+        .donation-card button {
+            background: #FF9933;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 30px;
+            transition: all 0.4s ease;
+            width: 100%;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .donation-card button:hover {
+            background: #008000;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Hover Effects */
+        .donation-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+            border-color: #FFA500;
+        }
+
+        .donation-card:hover i {
+            transform: rotate(360deg) scale(1.2);
+        }
+
+        .donation-card:hover h2 {
+            color: #FFA500;
+        }
+
+        /* Background Animation for Cards */
+        .donation-card:before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 300%;
+            height: 300%;
+            background: radial-gradient(circle, rgba(255,153,51,0.5), rgba(0,128,0,0.5));
+            transition: all 0.7s ease;
+            transform: scale(0);
+            z-index: -1;
+            border-radius: 50%;
+        }
+
+        .donation-card:hover:before {
+            transform: scale(1);
+        }
+
+        /* Button Ripple Animation */
+        button:active:after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: ripple 0.6s linear;
+        }
+
+        @keyframes ripple {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 0.5;
+            }
+            100% {
+                width: 300px;
+                height: 300px;
+                opacity: 0;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media only screen and (max-width: 768px) {
+            .donation-section {
+                flex-direction: column;
+            }
+
+            .donation-card {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="donation-section">
+        <!-- India Donation Card -->
+        <div class="donation-card">
+            <i class="fas fa-flag" style="color: #FF9933;"></i>
+            <h2>India</h2>
+            <button onclick="location.href='https://rzp.io/l/rftsdomestic'">Donate Now</button>
+        </div>
+
+        <!-- International Donation Card -->
+        <div class="donation-card">
+            <i class="fas fa-globe" style="color: #008000;"></i>
+            <h2>International</h2>
+            <button onclick="location.href='#donateInternational'">Donate Now</button>
+        </div>
+    </div>
+
+    <!-- Font Awesome Icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    
+</body>
+</html>
