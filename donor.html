@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donor Registration</title>
+    <title>Student Registration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,59 +14,75 @@
 
         .form-container {
             background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            max-width: 500px;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 900px;
             margin: 0 auto;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
         }
 
         h2 {
             color: #333;
+            border-bottom: 2px solid #28a745;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
         }
 
         label {
             display: block;
             margin-top: 10px;
+            font-weight: bold;
         }
 
-        input, select {
+        input,
+        select,
+        textarea {
             width: 100%;
             padding: 10px;
             margin-top: 5px;
             margin-bottom: 15px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 5px;
+            box-sizing: border-box;
         }
 
-        .next-button {
+        input.error,
+        select.error,
+        textarea.error {
+            border-color: red;
+        }
+
+        input[type="file"] {
+            border: none;
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .submit-button,
+        .next-button,
+        .prev-button {
             background-color: #28a745;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 25px;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
         }
 
-        .next-button:hover {
+        .submit-button:hover,
+        .next-button:hover,
+        .prev-button:hover {
             background-color: #218838;
         }
 
-        .success-message {
-            display: none;
-            text-align: center;
-            background-color: #d4edda;
-            padding: 20px;
-            border-radius: 5px;
-            border: 1px solid #c3e6cb;
-        }
-
-        .popup-message {
-            display: none;
-            background-color: #d4edda;
-            padding: 10px;
-            border-radius: 4px;
-            border: 1px solid #c3e6cb;
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 35px;
+            cursor: pointer;
         }
 
         .step {
@@ -75,189 +92,393 @@
         .step.active {
             display: block;
         }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            display: none;
+        }
+
+        #passwordError {
+            color: red;
+            display: none;
+            margin-top: -10px;
+            margin-bottom: 15px;
+        }
+
+        #emailError {
+            color: red;
+            display: none;
+        }
+        input[type="number"]::-webkit-outer-spin-button,
+            input[type="number"]::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
     </style>
 </head>
 <body>
-
     <div class="form-container">
         <form id="registrationForm">
             <!-- Step 1: Basic Details -->
             <div class="step step-1 active">
                 <h2>Step 1: Basic Details</h2>
+
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required>
+                <span class="error-message" id="nameError">Name is required.</span>
 
+                <label for="mobile">country code:</label>
+                <select id="countryCode" name="countryCode" required>
+                    <option value="+91">India (+91)</option>
+                    <option value="+1">USA (+1)</option>
+                    <option value="+44">UK (+44)</option>
+                    <option value="+61">Australia (+61)</option>
+                </select>
                 <label for="mobile">Mobile Number:</label>
-                <input type="text" id="mobile" name="mobile" required>
+                <input type="number" id="mobile" name="mobile" required>
+                <span class="error-message" id="mobileError">Mobile number is required.</span>
 
-                <label for="email">Email-ID:</label>
+                <label for="email">E-mail Address:</label>
                 <input type="email" id="email" name="email" required>
+                <span class="error-message" id="emailError">Invalid email format</span>
 
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <!-- Password Section -->
+<span id="passwordHint" style="color: red; display: none;">Password must be between 8 to 10 characters.</span>
+
+<label for="password">Password:</label>
+<input type="password" id="password" name="password" minlength="8" maxlength="10" required>
+<i class="fa fa-eye toggle-password" onclick="togglePassword('password')"></i>
+<span id="passwordError" class="error-message">Password must be between 8 and 10 characters.</span>
+
+<!-- JavaScript to toggle hint on focus/blur -->
+<script>
+   document.getElementById('password').addEventListener('focus', function () {
+    document.getElementById('passwordHint').style.display = 'block';
+});
+
+document.getElementById('password').addEventListener('blur', function () {
+    if (document.getElementById('password').value.length < 8) {
+        document.getElementById('passwordHint').style.display = 'none';
+    }
+});
+
+document.getElementById('password').addEventListener('input', function () {
+    const passwordLength = this.value.length;
+
+    if (passwordLength >= 8) {
+        document.getElementById('passwordHint').style.display = 'none';
+    } else {
+        document.getElementById('passwordHint').style.display = 'block';
+    }
+});
+
+</script>
+
+
 
                 <label for="confirmPassword">Confirm Password:</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                <input type="password" id="confirmPassword" name="confirmPassword" minlength="8" maxlength="10" required>
+                <i class="fa fa-eye toggle-password" onclick="togglePassword('confirmPassword')"></i>
+                <span id="confirmPasswordError" class="error-message">Passwords do not match.</span>
 
                 <button type="button" class="next-button" onclick="nextStep()">Next</button>
             </div>
 
-           <!-- Step 2: Preferences -->
-<!-- Step 2: Preferences -->
+            <!-- Step 2: Preferences -->
 <div class="step step-2">
     <h2>Step 2: Preferences</h2>
 
     <!-- Courses Dropdown -->
-    <label for="courses">Courses:</label>
-    <select id="courses" name="courses" required onchange="updateYearOptions()">
-        <option value="">Select...</option>
-        <option value="medical">Medical</option>
-        <option value="engineering">Engineering</option>
-    </select>
+<label for="courses">Courses:</label>
+<select id="courses" name="courses" required>
+    <option value="">Select...</option>
+    <option value="medical">Medical</option>
+    <option value="engineering">Engineering</option>
+</select>
+<div id="coursesError" class="error-message" style="display: none;">Please select a course.</div>
 
-    <!-- Region Dropdown -->
-    <label for="region">Region:</label>
-    <select id="region" name="region" required>
-        <option value="">Select...</option>
-        <option value="anywhere">Anywhere from India</option>
-        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-        <option value="Andhra Pradesh">Andhra Pradesh</option>
-        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-        <option value="Assam">Assam</option>
-        <option value="Bihar">Bihar</option>
-        <option value="Chandigarh">Chandigarh</option>
-        <option value="Chhattisgarh">Chhattisgarh</option>
-        <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
-        <option value="Delhi">Delhi</option>
-        <option value="Goa">Goa</option>
-        <option value="Gujarat">Gujarat</option>
-        <option value="Haryana">Haryana</option>
-        <option value="Himachal Pradesh">Himachal Pradesh</option>
-        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-        <option value="Jharkhand">Jharkhand</option>
-        <option value="Karnataka">Karnataka</option>
-        <option value="Kerala">Kerala</option>
-        <option value="Ladakh">Ladakh</option>
-        <option value="Lakshadweep">Lakshadweep</option>
-        <option value="Madhya Pradesh">Madhya Pradesh</option>
-        <option value="Maharashtra">Maharashtra</option>
-        <option value="Manipur">Manipur</option>
-        <option value="Meghalaya">Meghalaya</option>
-        <option value="Mizoram">Mizoram</option>
-        <option value="Nagaland">Nagaland</option>
-        <option value="Odisha">Odisha</option>
-        <option value="Puducherry">Puducherry</option>
-        <option value="Punjab">Punjab</option>
-        <option value="Rajasthan">Rajasthan</option>
-        <option value="Sikkim">Sikkim</option>
-        <option value="Tamil Nadu">Tamil Nadu</option>
-        <option value="Telangana">Telangana</option>
-        <option value="Tripura">Tripura</option>
-        <option value="Uttar Pradesh">Uttar Pradesh</option>
-        <option value="Uttarakhand">Uttarakhand</option>
-        <option value="West Bengal">West Bengal</option>
-    </select>
+<!-- Region Dropdown -->
+<label for="region">Region:</label>
+<select id="region" name="region" required>
+    <option value="">Select...</option>
+    <option value="anywhere">Anywhere from India</option>
+    <!-- Add all other options here -->
+</select>
+<div id="regionError" class="error-message" style="display: none;">Please select a region.</div>
 
-    <!-- Year Dropdown -->
-    <label for="year">Year:</label>
-    <select id="year" name="year" required>
-        <option value="">Select...</option>
-        <!-- Year options will be dynamically populated based on the course -->
-    </select>
+<!-- Year Dropdown -->
+<label for="year">Year:</label>
+<select id="year" name="year" required>
+    <option value="">Select...</option>
+    <option value="">1</option>
+    <option value="">2</option>
+    <option value="">3</option>
+    <option value="">4</option>
+    <option value="">5</option>
+    <!-- Year options will be dynamically populated based on the course -->
+</select>
+<div id="yearError" class="error-message" style="display: none;">Please select a year.</div>
 
-    <!-- Next Button -->
+<!-- Status Dropdown -->
+<label for="status">Are you:</label>
+<select id="status" name="status" required onchange="toggleIdentityFields()">
+    <option value="">Select...</option>
+    <option value="Indian">Indian</option>
+    <option value="International">International</option>
+</select>
+<div id="statusError" class="error-message" style="display: none;">Please select your status.</div>
+
+
+    <!-- Navigation Buttons -->
+    <button type="button" class="prev-button" onclick="prevStep()">Previous</button>
     <button type="button" class="next-button" onclick="nextStep()">Next</button>
-            </div>
+</div>
 
-<!-- JavaScript to handle dynamic year options -->
+
 <script>
-function updateYearOptions() {
-    var course = document.getElementById("courses").value;
-    var yearSelect = document.getElementById("year");
-    yearSelect.innerHTML = ""; // Clear existing options
-
-    var years = [];
-
-    if (course === "medical") {
-        years = [1, 2, 3, 4, 5];
-    } else if (course === "engineering") {
-        years = [1, 2, 3, 4];
+    function updateYearOptions() {
+        const course = document.getElementById('courses').value;
+        const yearDropdown = document.getElementById('year');
+        yearDropdown.innerHTML = ''; // Clear existing options
+    
+        let yearOptions;
+    
+        // Define year options based on selected course
+        if (course === 'engineering') {
+            yearOptions = ['1', '2', '3', '4'];
+        } else if (course === 'medical') {
+            yearOptions = ['1', '2', '3', '4', '5'];
+        }
+    
+        // Populate year dropdown with options
+        yearOptions.forEach(year => {
+            const option = document.createElement('option');
+            option.value = year;
+            option.textContent = year;
+            yearDropdown.appendChild(option);
+        });
+    
+        // Add a default "Select..." option
+        const defaultOption = document.createElement('option');
+        defaultOption.value = '';
+        defaultOption.textContent = 'Select...';
+        yearDropdown.insertBefore(defaultOption, yearDropdown.firstChild);
     }
-
-    // Add the default option
-    var defaultOption = document.createElement("option");
-    defaultOption.value = "";
-    defaultOption.text = "Select...";
-    yearSelect.appendChild(defaultOption);
-
-    // Populate the year options based on the selected course
-    years.forEach(function(year) {
-        var option = document.createElement("option");
-        option.value = year;
-        option.text = year;
-        yearSelect.appendChild(option);
-    });
-}
-
-function goToNextStep() {
-    // Add your logic here to proceed to the next step in your form or process
-    alert("Proceeding to the next step!");
-}
-</script>
+    
+    // Add event listener for courses dropdown
+    document.getElementById('courses').addEventListener('change', updateYearOptions);
+    
+    // Call function initially to set default options
+    updateYearOptions();
+    </script>
+    
 
 
-            <!-- Step 3: PAN Card Details -->
-            <div class="step step-3">
-                <h2>Step 3: PAN Card Details</h2>
-                <label for="panCard">PAN Card:</label>
-                <input type="text" id="panCard" name="panCard" required>
+<!-- Step 3: PAN/Passport Details -->
+<div class="step step-3">
+    <h2>Step 3: Identification Details</h2>
+    <!-- PAN Card field (conditionally visible) -->
+<div id="panCardContainer" style="display: none;">
+    <label for="panCard">PAN Card:</label>
+    <input type="text" id="panCard" name="panCard" placeholder="Enter PAN Card Number" required>
+    <div id="panCardError" class="error-message" style="display: none;">Please enter your PAN Card number.</div>
+</div>
 
-                <button type="button" class="next-button" onclick="submitForm()">Submit</button>
-            </div>
+<!-- Passport field (conditionally visible) -->
+<div id="passportContainer" style="display: none;">
+    <label for="passport">Passport Number:</label>
+    <input type="text" id="passport" name="passport" placeholder="Enter Passport Number" required>
+    <div id="passportError" class="error-message" style="display: none;">Please enter your Passport number.</div>
+</div>
+
+<!-- Submit Button -->
+<button type="button" class="submit-button" onclick="submitForm()">Submit</button>
+
+
         </form>
-        
-        <div class="success-message" id="successMessage">
-            You have been successfully registered as a donor!
-        </div>
     </div>
 
     <script>
-        let currentStep = 0;
-        const steps = document.querySelectorAll('.step');
-        const successMessage = document.getElementById('successMessage');
-        const popupMessage = document.getElementById('popupMessage');
+    let currentStep = 1;
 
-        function nextStep() {
-            if (currentStep < steps.length - 1) {
-                steps[currentStep].classList.remove('active');
-                currentStep++;
-                steps[currentStep].classList.add('active');
-                if (currentStep === 1) {
-                    popupMessage.style.display = 'block';
-                }
-            } else {
-                // On final step (submit), show success message and reset form
-                document.getElementById('registrationForm').reset();
-                steps[currentStep].classList.remove('active');
-                successMessage.style.display = 'block';
-            }
+function showStep(step) {
+    document.querySelectorAll('.step').forEach(function (element) {
+        element.classList.remove('active');
+    });
+    document.querySelector('.step-' + step).classList.add('active');
+}
+
+function validateField(fieldId, errorId) {
+    const field = document.getElementById(fieldId);
+    const errorMessage = document.getElementById(errorId);
+
+    if (!field.value.trim()) {
+        field.classList.add('error');
+        errorMessage.style.display = 'block';
+        return false;
+    } else {
+        field.classList.remove('error');
+        errorMessage.style.display = 'none';
+        return true;
+    }
+}
+
+function validateEmail() {
+    const email = document.getElementById('email').value;
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const emailError = document.getElementById('emailError');
+
+    if (!emailPattern.test(email)) {
+        document.getElementById('email').classList.add('error');
+        emailError.style.display = 'block';
+        return false;
+    } else {
+        document.getElementById('email').classList.remove('error');
+        emailError.style.display = 'none';
+        return true;
+    }
+}
+
+function validateIdentificationFields() {
+    const status = document.getElementById('status').value;
+    let valid = true;
+
+    if (status === 'Indian') {
+        const panCard = document.getElementById('panCard');
+        const panCardError = document.getElementById('panCardError');
+
+        if (panCard.style.display !== 'none' && !panCard.value.trim()) {
+            panCard.classList.add('error');
+            panCardError.style.display = 'block';
+            valid = false;
+        } else {
+            panCard.classList.remove('error');
+            panCardError.style.display = 'none';
+        }
+    }
+
+    if (status === 'International') {
+        const passport = document.getElementById('passport');
+        const passportError = document.getElementById('passportError');
+
+        if (passport.style.display !== 'none' && !passport.value.trim()) {
+            passport.classList.add('error');
+            passportError.style.display = 'block';
+            valid = false;
+        } else {
+            passport.classList.remove('error');
+            passportError.style.display = 'none';
+        }
+    }
+
+    return valid;
+}
+
+function nextStep() {
+    let valid = true;
+
+    if (currentStep === 1) {
+        valid &= validateField('name', 'nameError');
+        valid &= validateField('mobile', 'mobileError');
+        valid &= validateEmail();
+
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        if (password.length < 8 || password.length > 10) {
+            document.getElementById('password').classList.add('error');
+            document.getElementById('passwordError').style.display = 'block';
+            valid = false;
+        } else {
+            document.getElementById('password').classList.remove('error');
+            document.getElementById('passwordError').style.display = 'none';
         }
 
-        function submitForm() {
-            // Here, you could add form validation if needed
-            // Redirect to success.html
-            window.location.href = 'success.html';
+        if (password !== confirmPassword) {
+            document.getElementById('confirmPassword').classList.add('error');
+            document.getElementById('confirmPasswordError').style.display = 'block';
+            valid = false;
+        } else {
+            document.getElementById('confirmPassword').classList.remove('error');
+            document.getElementById('confirmPasswordError').style.display = 'none';
         }
 
-        function toggleCourseType() {
-            const preference = document.getElementById('preference').value;
-            const courseTypeSelection = document.getElementById('courseTypeSelection');
-            if (preference === 'courses') {
-                courseTypeSelection.style.display = 'block';
-            } else {
-                courseTypeSelection.style.display = 'none';
-            }
+        if (valid) {
+            currentStep++;
+            showStep(currentStep);
         }
+    } else if (currentStep === 2) {
+        valid &= validateField('courses', 'coursesError');
+        valid &= validateField('region', 'regionError');
+        valid &= validateField('year', 'yearError');
+
+        const status = document.getElementById('status').value;
+        if (!status) {
+            document.getElementById('status').classList.add('error');
+            document.getElementById('statusError').style.display = 'block';
+            valid = false;
+        } else {
+            document.getElementById('status').classList.remove('error');
+            document.getElementById('statusError').style.display = 'none';
+        }
+
+        if (valid) {
+            currentStep++;
+            showStep(currentStep);
+        }
+    } else if (currentStep === 3) {
+        valid &= validateIdentificationFields();
+
+        if (valid) {
+            submitForm();
+        }
+    }
+}
+
+function togglePassword(id) {
+    const passwordInput = document.getElementById(id);
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+    } else {
+        passwordInput.type = 'password';
+    }
+}
+
+function toggleIdentityFields() {
+    const status = document.getElementById('status').value;
+    const panCardContainer = document.getElementById('panCardContainer');
+    const passportContainer = document.getElementById('passportContainer');
+
+    if (status === 'Indian') {
+        panCardContainer.style.display = 'block';
+        passportContainer.style.display = 'none';
+    } else if (status === 'International') {
+        panCardContainer.style.display = 'none';
+        passportContainer.style.display = 'block';
+    } else {
+        panCardContainer.style.display = 'none';
+        passportContainer.style.display = 'none';
+    }
+}
+
+function submitForm() {
+    const form = document.querySelector('form');
+    // Ensure fields are validated before submitting
+    const isValid = validateIdentificationFields();
+    if (isValid) {
+        form.action = 'donor.php';
+        form.submit();
+    }
+}
+
+// Initialize steps
+showStep(currentStep);
+
+// Add event listener for status change
+document.getElementById('status').addEventListener('change', toggleIdentityFields);
+
     </script>
 </body>
 </html>
