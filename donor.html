@@ -491,12 +491,14 @@ document.getElementById('password').addEventListener('input', function () {
 <div class="step step-3">
     <h2>Step 3: Identification Details</h2>
     <!-- PAN Card field (conditionally visible) -->
-<div id="panCardContainer" style="display: none;">
-    <label for="panCard">PAN Card:</label>
-    <input type="text" id="panCard" name="panCard"placeholder="Enter PAN Card Number" maxlength="10" pattern="[a-zA-Z0-9]{10}" title="Please enter a valid 10-character PAN Card number" required>
-    <div id="panCardError" class="error-message" style="display: none;">Please enter your PAN Card number.</div>
-</div>
-
+    <div id="panCardContainer">
+        <label for="panCard">PAN Card:</label>
+        <input type="text" id="panCard" name="panCard" placeholder="Enter PAN Card Number" 
+               maxlength="10" 
+               pattern="[A-Z]{5}[0-9]{4}[A-Z]" 
+               title="Please enter a valid PAN Card number in the format: ABCDE1234F" 
+               required>
+    </div>
 <!-- Passport field (conditionally visible) -->
 <div id="passportContainer" style="display: none;">
     <label for="passport">Passport Number:</label>
